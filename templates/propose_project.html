@@ -1,0 +1,17 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Propose a New Project{% endblock %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Propose a New Project</h3>
+            <form method="post" action="{% url 'propose_project' %}">
+                {% csrf_token %}
+                {{ proposal_form|crispy }}
+                <button type="submit" name="propose_project" class="btn btn-primary">Propose Project</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

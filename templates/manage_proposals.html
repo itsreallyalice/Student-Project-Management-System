@@ -1,0 +1,27 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Manage Student Project Proposals{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Manage Student Project Proposals</h3>
+            <ul class="list-group">
+                {% for project in notifications %}
+                    <li class="list-group-item">
+                        <h4>{{ project.title }}</h4>
+                        <p>{{ project.description }}</p>
+                        <p>Requested by: {{ project.proposed_by.name }} {{ project.proposed_by.surname }}</p>
+                        <form method="post" action="" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="project_id" value="{{ project.id }}">
+                            <button type="submit" name="accept_project" class="btn btn-success">Accept</button>
+                            <button type="submit" name="reject_project" class="btn btn-danger">Reject</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Proposed Projects{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Proposed Projects</h3>
+            <ul class="list-group">
+                {% for project in projects_with_topics %}
+                    <li class="list-group-item">
+                        <h4>{{ project.project.title }}</h4>
+                        <p>{{ project.project.description }}</p>
+                        <p>Required Skills: {{ project.project.required_skills }}</p>
+                        <p>Supervisor: {{ project.project.supervisor.name }} {{ project.project.supervisor.surname }}</p>
+                        {% if project.topics %}
+                            <h4>Topics:</h4>
+                            <ul>
+                                {% for topic in project.topics %}
+                                    <li>{{ topic.title }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No topics assigned to this project.</p>
+                        {% endif %}
+                    
+                    
+                    
+                        {% if existing_project %}
+                            <button type="button" class="btn btn-secondary" disabled>You have already proposed/requested a project</button>
+                        {% else %}
+                            <form method="post" action="{% url 'request_project' project.project.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Request Project</button>
+                            </form>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

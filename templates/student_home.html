@@ -1,0 +1,20 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Student Home{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Student Dashboard</h2>
+            <p>Welcome Student! Here you can view proposed projects, select a project, or propose a new project to a supervisor.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <a href="{% url 'proposed_projects' %}" class="btn btn-primary">View Proposed Projects</a>
+            <a href="{% url 'propose_project' %}" class="btn btn-secondary">Propose a New Project / View Your Project</a>
+        </div>
+    </div>
+{% endblock %}

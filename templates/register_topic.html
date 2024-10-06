@@ -1,0 +1,17 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Register Project Topics{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Register Project Topics</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ topic_form|crispy }}
+                <button type="submit" name="register_topic" class="btn btn-primary">Register Topic</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Supervisor Home{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Supervisor Dashboard</h2>
+            <p>Welcome Supervisor! Here you can manage your tasks.</p>
+        </div>
+    </div>
+    {% if notifications %}
+        <ul>
+            {% for notification in notifications %}
+                <li>{{ notification.message }} - {{ notification.created_at }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No new notifications.</p>
+    {% endif %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <!-- Navigation Buttons -->
+            <div class="btn-group" role="group">
+                <a href="{% url 'register_topic' %}" class="btn btn-primary">Register Project Topics</a>
+                <a href="{% url 'register_proposal' %}" class="btn btn-primary">Register Project Proposals</a>
+                <a href="{% url 'manage_proposals' %}" class="btn btn-primary">Manage Student Project Proposals</a>
+                <a href="{% url 'accepted_projects' %}" class="btn btn-primary">Accepted Projects</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

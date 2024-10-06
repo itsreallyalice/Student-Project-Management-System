@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}Your Proposed Project{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Your Proposed Project</h2>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h4 class="card-title">{{ project.title }}</h4>
+                    <p class="card-text"><strong>Description:</strong> {{ project.description }}</p>
+                    <p class="card-text"><strong>Required Skills:</strong> {{ project.required_skills }}</p>
+                    <p class="card-text"><strong>Status:</strong> {{ project.status }}</p>
+                    <p class="card-text"><strong>Supervisor:</strong> {{ project.supervisor.name }} {{ project.supervisor.surname }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

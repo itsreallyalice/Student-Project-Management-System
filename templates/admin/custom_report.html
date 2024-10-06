@@ -1,0 +1,69 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Report for Supervisor: {{ supervisor.name }} {{ supervisor.surname }}</h1>
+
+    <h2>Supervisor Details</h2>
+    <ul>
+        <li><strong>Name:</strong> {{ supervisor.name }} {{ supervisor.surname }}</li>
+        <li><strong>Department:</strong> {{ supervisor.department }}</li>
+        <li><strong>Email:</strong> {{ supervisor.email }}</li>
+        <li><strong>Telephone:</strong> {{ supervisor.telephone_number }}</li>
+    </ul>
+
+    <h2>Projects</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Project Title</th>
+            <th>Status</th>
+            <th>Proposed By (Student)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for project in supervisor.project_set.all %}
+            <tr>
+                <td>{{ project.title }}</td>
+                <td>{{ project.status }}</td>
+                <td>{{ project.proposed_by.name }} {{ project.proposed_by.surname }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">No projects associated with this supervisor.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Students Working on Supervisor's Projects</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Email</th>
+            <th>Project(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.name }} {{ student.surname }}</td>
+                <td>{{ student.course }}</td>
+                <td>{{ student.email }}</td>
+                <td>
+                    <ul>
+                        {% for project in student.project_set.all %}
+                            <li>{{ project.title }} ({{ project.status }})</li>
+                        {% empty %}
+                            <li>No project assigned</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
